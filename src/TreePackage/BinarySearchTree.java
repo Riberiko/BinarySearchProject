@@ -6,7 +6,7 @@ import java.util.*;
 public class BinarySearchTree<T extends Comparable<? super T>>
         extends BinaryTree<T> implements SearchTreeInterface<T>
 {
-    private final static int COUNT = 10;
+    private final static int COUNT = 5;
 
     public BinarySearchTree()
     {
@@ -289,13 +289,14 @@ public class BinarySearchTree<T extends Comparable<? super T>>
      * @return
      */
     private boolean testLeft(T leftValue, T val){
+        if(leftValue == null) return true;
         if(leftValue.compareTo(val) == 0) return true;
-        if(leftValue.compareTo(val) > 0) return true;
+        if(leftValue.compareTo(val) < 0) return true;
         return false;
     }
 
     private boolean testRight(T rightVal, T val){
-        if(rightVal.compareTo(val) < 0) return true;
+        if(rightVal.compareTo(val) > 0) return true;
         return false;
     }
 
@@ -352,8 +353,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     private void print2DUtil(BinaryNode<T> root, int space)
     {
         // Base case
-        if (root == null)
-            return;
+        if (root == null) return;
 
         // Increase distance between levels
         space += COUNT;
@@ -366,7 +366,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         System.out.print("\n");
         for (int i = COUNT; i < space; i++)
             System.out.print(" ");
-        System.out.print(root.getData() + "\n");
+        System.out.print("{ "+root.getData() + " }\n");
 
         // Process left child
         print2DUtil(root.getLeftChild(), space);
