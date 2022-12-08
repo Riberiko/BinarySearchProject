@@ -19,9 +19,16 @@ public interface ParserInterface {
 
 
     /**
-     * Finds the user defined key words in a Java program and adds them to the identifiers BST.
+     * Retrieves a binary search tree that contains users words
+     *
+     * @return a Binary Search Tree of String
      */
     public BinarySearchTree<String> getUserWordsTree();
 
+    /**
+     * Retrieves a binary search tree that contains reserved words
+     *
+     * @return  a Binary Search Tree of String
+     */
     public BinarySearchTree<String> getReservedWordsTree();
 }

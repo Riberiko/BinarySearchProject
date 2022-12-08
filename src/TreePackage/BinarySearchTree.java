@@ -1,5 +1,14 @@
 package TreePackage;
 
+/**
+ *
+ * This is a Binary Tree optimized for searching operations
+ *
+ * @author  the one before riberiko niyomwungere
+ * @author  Riberiko Niyomwungere
+ *
+ * @version 1.0
+ */
 
 import java.util.*;
 
@@ -39,11 +48,11 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         {
             T rootEntry = rootNode.getData();
 
-            if (anEntry.equals(rootEntry))
+            if (rootEntry != null && anEntry.equals(rootEntry))
                 result = rootEntry;
-            else if (anEntry.compareTo(rootEntry) < 0)
+            else if (rootEntry != null && anEntry.compareTo(rootEntry) < 0)     //Riko changed this to deal with null values
                 result = findEntry(rootNode.getLeftChild(), anEntry);
-            else
+            else if (rootEntry != null && anEntry.compareTo(rootEntry) > 0)     //Riko changed this to deal with null values
                 result = findEntry(rootNode.getRightChild(), anEntry);
         } // end if
 
@@ -105,13 +114,20 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     /**
      * creates an empty binary search tree and populates it with the data
      * form array
-     * @param list
+     * @param list  list to add
      */
     public void addArray(List<T> list){
         setRootNode(new BinaryNode<>());
         addArray(list, getRootNode());
     }
 
+    /**
+     * creates an empty binary search tree and populates it with the data
+     * form array
+     *
+     * @param list  list to add
+     * @param node  current head node
+     */
     private void addArray(List<T> list, BinaryNode node){
         if(addArrayEmpty(list) || node == null) return;
         if(node.getData() == null){
@@ -129,6 +145,12 @@ public class BinarySearchTree<T extends Comparable<? super T>>
 
     }
 
+    /**
+     * Get methods that returns the item in the tree that corresponds to inorder
+     *
+     * @param index     the index to make this feel like an array
+     * @return  the node found at that index
+     */
     public T get(int index){
         assert (index < getNumberOfNodes() && index >= 0);
         Iterator iter = getInorderIterator();
@@ -257,6 +279,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     } // end removeLargest
 
     /**
+     *Determines if the tree is a binary search tree
      *
      * @return
      */
@@ -265,9 +288,10 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     }
 
     /**
+     * Determins if the node passed in is a binary search optimal
      *
-     * @param node
-     * @return
+     * @param node  to check
+     * @return  true if it is
      */
     private boolean isBST(BinaryNode node){
         if(node == null) return true;
@@ -283,10 +307,11 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     }
 
     /**
+     *The check for the left node to see if it is binary search optimal
      *
-     * @param leftValue
-     * @param val
-     * @return
+     * @param leftValue value for the left node
+     * @param val   value for the head node
+     * @return  true if left is less than  or equal to head
      */
     private boolean testLeft(T leftValue, T val){
         if(leftValue == null) return true;
@@ -295,23 +320,32 @@ public class BinarySearchTree<T extends Comparable<? super T>>
         return false;
     }
 
+    /**
+     *The check for the right node to see if it is binary search optimal
+     *
+     * @param rightVal value for the right node
+     * @param val   value for the head node
+     * @return  true if right is greater than head node
+     */
     private boolean testRight(T rightVal, T val){
         if(rightVal.compareTo(val) > 0) return true;
         return false;
     }
 
     /**
+     *Determines if the tree is balanced
      *
-     * @return
+     * @return true if it is balanced
      */
     public boolean isBalanced(){
         return isBalanced(getRootNode());
     }
 
     /**
+     *Determines if the node is balanced
      *
-     * @param root
-     * @return
+     * @param root  the node to check
+     * @return  true if it is balanced
      */
     private boolean isBalanced(BinaryNode<T> root) {
         if (root == null) {
@@ -329,9 +363,10 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     }
 
     /**
+     * Returns the height of the node
      *
-     * @param root
-     * @return
+     * @param root  the node to check
+     * @return  the height level for the node
      */
     private int getHeight(BinaryNode<T> root) {
         if (root == null) {
@@ -346,9 +381,10 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     }
 
     /**
+     * Prints the tree out
      *
-     * @param root
-     * @param space
+     * @param root  the node of the tree to print
+     * @param space the number spaces desired
      */
     private void print2DUtil(BinaryNode<T> root, int space)
     {
@@ -373,7 +409,7 @@ public class BinarySearchTree<T extends Comparable<? super T>>
     }
 
     /**
-     *
+     *Prints out the binary tree
      */
     public void print2D()
     {
